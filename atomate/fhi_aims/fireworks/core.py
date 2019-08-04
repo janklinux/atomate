@@ -65,4 +65,4 @@ class OptimizeFW(Firework):
 #            VaspToDb(db_file=db_file, additional_fields={"task_label": name}))
 
         super(OptimizeFW, self).__init__(t, parents=parents, name="{}-{}".
-                                         format('FHI-aims: ', name), **kwargs)
+                                         format(structure_formula, name), **kwargs)
