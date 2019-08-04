@@ -47,10 +47,19 @@ class OptimizeFW(Firework):
 
         t = []
         t.append(WriteAimsFromIOSet(control=control, structure=structure))
-
         t.append(RunAimsCustodian(aims_cmd=aims_cmd, job_type=job_type, max_force_threshold=max_force_threshold))
-
         t.append(PassCalcLocs(name=name))
+
+        tmp = []
+        for line in self['structure']:
+            if 'atom' in line:
+                atom = line.split()[4]
+                if tmp.count(atom) == 0:
+                    tmp.append(atom)
+
+        structure_formula = ''
+        for el in tmp:
+            structure_formula += el + tmp.count(el)
 
 #        t.append(
 #            VaspToDb(db_file=db_file, additional_fields={"task_label": name}))

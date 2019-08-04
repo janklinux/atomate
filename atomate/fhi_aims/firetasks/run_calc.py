@@ -25,7 +25,7 @@ from fireworks import explicit_serialize, FiretaskBase, FWAction
 from atomate.utils.utils import env_chk, get_logger
 
 
-__author__ = 'Anubhav Jain <ajain@lbl.gov>'
+__author__ = 'Jan Kloppenburg <jank@numphys.org>'
 __credits__ = 'Shyue Ping Ong <ong.sp>'
 
 logger = get_logger(__name__)
