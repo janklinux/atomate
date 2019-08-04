@@ -16,7 +16,7 @@ import subprocess
 
 from custodian import Custodian
 from custodian.fhi_aims.jobs import AimsJob
-from custodian.fhi_aims.handlers import FrozenJobErrorHandler, AimsTypoHandler, AimsRelaxHandler
+from custodian.fhi_aims.handlers import FrozenJobErrorHandler, AimsRelaxHandler
 from custodian.fhi_aims.validators import AimsConvergedValidator
 
 
