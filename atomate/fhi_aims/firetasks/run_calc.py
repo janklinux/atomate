@@ -17,7 +17,7 @@ import subprocess
 from custodian import Custodian
 from custodian.fhi_aims.jobs import AimsJob
 from custodian.fhi_aims.handlers import FrozenJobErrorHandler, AimsErrorHandler
-from custodian.fhi_aims.validators import AimsConvergedValidator, AimsSecondValidator
+from custodian.fhi_aims.validators import AimsConvergedValidator
 
 
 from fireworks import explicit_serialize, FiretaskBase, FWAction
