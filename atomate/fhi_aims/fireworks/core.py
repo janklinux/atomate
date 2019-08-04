@@ -52,7 +52,7 @@ class OptimizeFW(Firework):
 
         tmp = []
         for line in self['structure']:
-            if 'atom' in line:
+            if len(line.split()) > 0 and 'atom' in line:
                 atom = line.split()[4]
                 if tmp.count(atom) == 0:
                     tmp.append(atom)
