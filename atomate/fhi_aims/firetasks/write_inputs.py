@@ -60,10 +60,6 @@ class WriteAimsFromIOSet(FiretaskBase):
 #                with open(src, 'rt') as f_in:
 #                    ctrl.write(f_in.read())
 
-        with open('control.in', 'at') as ctrl:
-            for line in self['control']:
-                ctrl.write(line)
-
 
 @explicit_serialize
 class ModifyControl(FiretaskBase):
