@@ -51,15 +51,23 @@ class OptimizeFW(Firework):
         t.append(PassCalcLocs(name=name))
 
         tmp = []
+        tmp2 = []
         for line in structure:
-            if len(line.split()) > 0 and 'atom' in line:
-                atom = line.split()[4]
-                if tmp.count(atom) == 0:
-                    tmp.append(atom)
+            if 'atom' in line:
+                ls = line.split()
+                if len(ls) > 0:
+                    atom = ls[4]
+                    if tmp.count(atom) == 0:
+                        tmp.append(atom)
+                    tmp2.append(atom)
 
-        structure_formula = ''
+        structure_formula = []
         for el in tmp:
-            structure_formula += el + tmp.count(el)
+            structure_formula.append(el + str(tmp2.count(el)))
+
+        print('-'.join(structure_formula))
+
+        del tmp, tmp2
 
 #        t.append(
 #            VaspToDb(db_file=db_file, additional_fields={"task_label": name}))
