@@ -51,7 +51,7 @@ class OptimizeFW(Firework):
         t.append(PassCalcLocs(name=name))
 
         tmp = []
-        for line in self['structure']:
+        for line in structure:
             if len(line.split()) > 0 and 'atom' in line:
                 atom = line.split()[4]
                 if tmp.count(atom) == 0:
