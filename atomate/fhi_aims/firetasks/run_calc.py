@@ -17,6 +17,8 @@ import subprocess
 from custodian import Custodian
 from custodian.fhi_aims.jobs import AimsJob
 from custodian.fhi_aims.handlers import FrozenJobErrorHandler, AimsErrorHandler
+from custodian.fhi_aims.validators import AimsConvergedValidator
+
 
 from fireworks import explicit_serialize, FiretaskBase, FWAction
 
@@ -118,10 +120,13 @@ class RunAimsCustodian(FiretaskBase):
         else:
             handlers = handler_group
 
+        # if job_type == "relax":
+        validators = [AimsConvergedValidator()]
+
 #        if self.get("max_force_threshold"):
 #            handlers.append(MaxForceErrorHandler(max_force_threshold=self["max_force_threshold"]))
 
-        c = Custodian(handlers, jobs, validators=None, max_errors=max_errors,
+        c = Custodian(handlers, jobs, validators=validators, max_errors=max_errors,
                       scratch_dir=scratch_dir, gzipped_output=gzip_output)
 
         c.run()
