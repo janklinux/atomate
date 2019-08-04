@@ -40,10 +40,11 @@ class WriteAimsFromIOSet(FiretaskBase):
         element_list = []
         with open('geometry.in', 'wt') as f:
             for line in self['structure']:
-                f.write(line)
-                atom = line.split()[4]
-                if element_list.count(atom) == 0:
-                    element_list.append(atom)
+                if len(line.split()) > 0:
+                    f.write(line)
+                    atom = line.split()[4]
+                    if element_list.count(atom) == 0:
+                        element_list.append(atom)
 
         with open('control.in', 'wt') as f:
             for line in self['control']:
