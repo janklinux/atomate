@@ -90,7 +90,7 @@ class RunAimsCustodian(FiretaskBase):
     def run_task(self, fw_spec):
 
         handler_groups = {
-            "default": [AimsTypoHandler(), AimsRelaxHandler(),
+            "default": [AimsRelaxHandler(),
                         FrozenJobErrorHandler()],
             "no_handler": []
             }
