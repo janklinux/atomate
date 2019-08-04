@@ -121,7 +121,7 @@ class RunAimsCustodian(FiretaskBase):
             handlers = handler_group
 
         # if job_type == "relax":
-        validators = [AimsSecondValidator()]
+        validators = [AimsConvergedValidator()]
 
 #        if self.get("max_force_threshold"):
 #            handlers.append(MaxForceErrorHandler(max_force_threshold=self["max_force_threshold"]))
