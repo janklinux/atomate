@@ -17,7 +17,7 @@ import subprocess
 from custodian import Custodian
 from custodian.fhi_aims.jobs import AimsJob
 from custodian.fhi_aims.handlers import FrozenJobErrorHandler, AimsRelaxHandler
-from custodian.fhi_aims.validators import AimsConvergedValidator
+from custodian.fhi_aims.validators import AimsConvergedValidator, AimsTDDFTValidator
 
 
 from fireworks import explicit_serialize, FiretaskBase, FWAction
@@ -83,8 +83,8 @@ class RunAimsCustodian(FiretaskBase):
         wall_time (int): Total wall time in seconds. Activates WalltimeHandler if set.
         half_kpts_first_relax (bool): Use half the k-points for the first relaxation
     """
-    required_params = ["aims_cmd"]
-    optional_params = ["job_type", "handler_group", "max_force_threshold", "scratch_dir",
+    required_params = ["aims_cmd", 'job_type']
+    optional_params = ["handler_group", "max_force_threshold", "scratch_dir",
                        "gzip_output", "max_errors", "wall_time"]
 
     def run_task(self, fw_spec):
@@ -103,14 +103,18 @@ class RunAimsCustodian(FiretaskBase):
             aims_cmd = shlex.split(aims_cmd)
 
         # initialize variables
-        job_type = self.get("job_type", "light_and_tight_relax")
+        job_type = self.get("job_type")
         scratch_dir = env_chk(self.get("scratch_dir"), fw_spec)
         gzip_output = self.get("gzip_output", True)
         max_errors = self.get("max_errors", 10)
 
         # construct jobs
         if job_type == "relax":
-            jobs = [AimsJob(aims_cmd=aims_cmd)]  # , aims_basis_files=aims_basis_files)]
+            jobs = [AimsJob(aims_cmd=aims_cmd)]
+            validators = [AimsConvergedValidator()]
+        elif job_type == 'tddft':
+            jobs = [AimsJob(aims_cmd=aims_cmd)]
+            validators = [AimsConvergedValidator(), AimsTDDFTValidator()]
         else:
             raise ValueError('Unknown job type')
 
@@ -120,9 +124,6 @@ class RunAimsCustodian(FiretaskBase):
             handlers = handler_groups[handler_group]
         else:
             handlers = handler_group
-
-        # if job_type == "relax":
-        validators = [AimsConvergedValidator()]
 
 #        if self.get("max_force_threshold"):
 #            handlers.append(MaxForceErrorHandler(max_force_threshold=self["max_force_threshold"]))
