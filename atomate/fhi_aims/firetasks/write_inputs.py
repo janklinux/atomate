@@ -6,6 +6,7 @@ from __future__ import division, print_function, unicode_literals, absolute_impo
 This module defines tasks for writing vasp input sets for various types of vasp calculations
 """
 
+import os
 
 from fireworks import FiretaskBase, explicit_serialize
 
@@ -37,18 +38,18 @@ class WriteAimsFromIOSet(FiretaskBase):
     optional_params = ['aims_input_changes']
 
     def run_task(self, fw_spec):
-        element_list = []
-        with open('geometry.in', 'wt') as f:
-            for line in self['structure']:
-                if len(line.split()) > 0:
-                    f.write(line)
-                    atom = line.split()[4]
-                    if element_list.count(atom) == 0:
-                        element_list.append(atom)
+#        with open('geometry.in', 'wt') as f:
+#            for line in self['structure']:
+#                if len(line.split()) > 0:
+#                    f.write(line)
+#                    atom = line.split()[4]
 
         with open('control.in', 'wt') as f:
             for line in self['control']:
                 f.write(line)
+
+        self['structure'].to(filename='geometry.in', fmt='aims')
+#        print(self['structure'].to('geometry.in'))
 
 #        basis_files = []
 #        for el in element_list:
