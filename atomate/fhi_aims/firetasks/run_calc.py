@@ -93,7 +93,7 @@ class RunAimsCustodian(FiretaskBase):
             }
 
         aims_cmd = env_chk(self["aims_cmd"], fw_spec)
-        aims_basis_files = env_chk(self["aims_basis_files"], fw_spec)
+        # aims_basis_files = env_chk(self["aims_basis_files"], fw_spec)
 
         if isinstance(aims_cmd, six.string_types):
             aims_cmd = os.path.expandvars(aims_cmd)
@@ -107,7 +107,7 @@ class RunAimsCustodian(FiretaskBase):
 
         # construct jobs
         if job_type == "relax":
-            jobs = [AimsJob(aims_cmd=aims_cmd)]  #, aims_basis_files=aims_basis_files)]
+            jobs = [AimsJob(aims_cmd=aims_cmd)]  # , aims_basis_files=aims_basis_files)]
         else:
             raise ValueError('Unknown job type')
 
