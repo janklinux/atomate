@@ -65,12 +65,10 @@ class OptimizeFW(Firework):
         for el in tmp:
             structure_formula.append(el + str(tmp2.count(el)))
 
-        print('-'.join(structure_formula))
-
         del tmp, tmp2
 
 #        t.append(
 #            VaspToDb(db_file=db_file, additional_fields={"task_label": name}))
 
         super(OptimizeFW, self).__init__(t, parents=parents, name="{}-{}".
-                                         format(structure_formula, name), **kwargs)
+                                         format('-'.join(structure_formula), name), **kwargs)

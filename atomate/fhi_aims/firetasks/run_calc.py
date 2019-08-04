@@ -16,7 +16,7 @@ import subprocess
 
 from custodian import Custodian
 from custodian.fhi_aims.jobs import AimsJob
-from custodian.fhi_aims.handlers import FrozenJobErrorHandler, AimsErrorHandler
+from custodian.fhi_aims.handlers import FrozenJobErrorHandler, AimsTypoHandler, AimsRelaxHandler
 from custodian.fhi_aims.validators import AimsConvergedValidator
 
 
@@ -90,7 +90,8 @@ class RunAimsCustodian(FiretaskBase):
     def run_task(self, fw_spec):
 
         handler_groups = {
-            "default": [AimsErrorHandler(), FrozenJobErrorHandler()],
+            "default": [AimsTypoHandler(), AimsRelaxHandler(),
+                        FrozenJobErrorHandler()],
             "no_handler": []
             }
 
