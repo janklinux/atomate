@@ -77,9 +77,7 @@ class OptimizeFW(Firework):
         t.append(PassCalcLocs(name=name))
         t.append(VaspToDb(db_file=db_file, additional_fields={"task_label": name}))
         super(OptimizeFW, self).__init__(t, parents=parents, name="{}-{}".
-                                         format(
-                                             structure.composition.reduced_formula, name),
-                                         **kwargs)
+                                         format(structure.composition.reduced_formula, name), **kwargs)
 
 
 class StaticFW(Firework):
