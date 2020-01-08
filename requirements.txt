@@ -1,4 +1,4 @@
-numpy==1.18.0
+numpy==1.18.1
 scipy==1.4.1
 FireWorks==1.9.5
 pymatgen_diffusion==2019.8.18
@@ -12,4 +12,4 @@ pymatgen==2019.12.22
 custodian==2019.9.23
 networkx==2.4
 pydash==4.7.6
-pyyaml==5.2
+pyyaml==5.3
