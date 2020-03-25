@@ -120,10 +120,7 @@ class OptimizeFW(Firework):
         )
         t.append(PassCalcLocs(name=name))
         t.append(VaspToDb(db_file=db_file, additional_fields={"task_label": name}))
-<<<<<<< HEAD
-        super(OptimizeFW, self).__init__(t, parents=parents, name="{}-{}".
-                                         format(structure.composition.reduced_formula, name), **kwargs)
-=======
+
         super(OptimizeFW, self).__init__(
             t,
             parents=parents,
@@ -351,7 +348,6 @@ class ScanOptimizeFW(Firework):
 
         # Parse the outputs into the database
         t.append(VaspToDb(db_file=db_file, additional_fields={"task_label": name}))
->>>>>>> 32f9b7448294226417b7d4dc6fa4456585bf546b
 
         # gzip the output
         t.append(GzipDir())
